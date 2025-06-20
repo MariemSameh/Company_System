@@ -1,0 +1,45 @@
+﻿@model Company_System.Models.Employee
+
+@{
+    ViewData["Title"] = "Employee Details";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow border-0">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">Employee Details</h4>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4 font-weight-bold">ID</dt>
+                        <dd class="col-sm-8">@Model.Id</dd>
+
+                        <dt class="col-sm-4 font-weight-bold">Name</dt>
+                        <dd class="col-sm-8">@Model.Name</dd>
+
+                        <dt class="col-sm-4 font-weight-bold">Email</dt>
+                        <dd class="col-sm-8">@Model.Email</dd>
+
+                        <dt class="col-sm-4 font-weight-bold">Phone Number</dt>
+                        <dd class="col-sm-8">@Model.PhoneNumber</dd>
+
+                        <dt class="col-sm-4 font-weight-bold">Salary</dt>
+                        <dd class="col-sm-8">@Model.Salary.ToString("C")</dd>
+
+                        <dt class="col-sm-4 font-weight-bold">Join Date</dt>
+                        <dd class="col-sm-8">@Model.JoinDate.ToShortDateString()</dd>
+
+                        <dt class="col-sm-4 font-weight-bold">Department</dt>
+                        <dd class="col-sm-8">@Model.department?.Name</dd>
+                    </dl>
+
+                    <div class="text-right mt-4">
+                        @Html.ActionLink("Back to List", "Index", "Employee", new { area = "HR" }, new { @class = "btn btn-secondary" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

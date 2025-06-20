@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Company_System.Models.Employee>
+@{
+    ViewData["Title"] = "Employees";
+    var Departments = ViewBag.Departments as IEnumerable<SelectListItem>;
+}
+
+<h2 class="mb-4">Employees</h2>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    @Html.ActionLink("Add New", "Create", "Employee", new { area = "HR" }, new { @class = "btn btn-success" })
+
+    @using (Html.BeginForm("Index", "Employee", FormMethod.Get, new { area = "HR" }))
+    {
+        <div class="form-inline">
+            <label class="mr-2" for="DepartmentId">Filter by Department:</label>
+            @Html.DropDownList(
+                     "departmentId",
+                     Departments,
+                     "All Departments",
+                     new { @class = "form-control", @id = "DepartmentId", onchange = "this.form.submit()" }
+                     )
+        </div>
+    }
+</div>
+
+<table class="table table-striped table-hover table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Salary</th>
+            <th>Join Date</th>
+            <th>Department</th>
+            <th style="width: 230px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var emp in Model)
+        {
+            <tr>
+                <td>@emp.Id</td>
+                <td>@emp.Name</td>
+                <td>@emp.Email</td>
+                <td>@emp.PhoneNumber</td>
+                <td>@emp.Salary.ToString("C")</td>
+                <td>@emp.JoinDate.ToShortDateString()</td>
+                <td>@emp.department?.Name</td>
+                <td>
+                    <!-- Delete Button triggers modal -->
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal-@emp.Id"><i class="bi bi-trash"></i></button>
+
+                    @Html.ActionLink("", "Edit", "Employee", new { empId = emp.Id, area = "HR" }, new { @class = "btn btn-primary btn-sm mx-1 bi bi-pencil-square" })
+
+                    @Html.ActionLink("", "Details", "Employee", new { empId = emp.Id, area = "HR" }, new { @class = "btn btn-info btn-sm bi bi-card-list" })
+
+                    <!-- Delete Modal -->
+                    <div class="modal fade" id="deleteModal-@emp.Id" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel-@emp.Id" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-danger text-white">
+                                    <h5 class="modal-title" id="deleteModalLabel-@emp.Id">Confirm Deletion</h5>
+                                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete employee <strong>@emp.Name</strong>?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    @using (Html.BeginForm("Delete", "Employee", new { empId = emp.Id, area = "HR" }, FormMethod.Post))
+                                    {
+                                        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
