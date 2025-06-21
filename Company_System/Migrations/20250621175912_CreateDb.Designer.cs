@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Company_System.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250620171651_updateEmployee")]
-    partial class updateEmployee
+    [Migration("20250621175912_CreateDb")]
+    partial class CreateDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,10 +28,7 @@ namespace Company_System.Migrations
             modelBuilder.Entity("Company_System.Models.Department", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -44,6 +41,26 @@ namespace Company_System.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Departments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Human Resources Department",
+                            Name = "HR"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Information Technology Department",
+                            Name = "IT"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Finance Department",
+                            Name = "Finance"
+                        });
                 });
 
             modelBuilder.Entity("Company_System.Models.Employee", b =>
@@ -83,6 +100,52 @@ namespace Company_System.Migrations
                     b.HasIndex("DeptId");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 303011,
+                            DeptId = 1,
+                            Email = "ali@company.com",
+                            JoinDate = new DateTime(2023, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Ali Ahmed",
+                            Password = "Ali12345",
+                            PhoneNumber = "01012345678",
+                            Salary = 8000.00m
+                        },
+                        new
+                        {
+                            Id = 101011,
+                            DeptId = 2,
+                            Email = "mona@company.com",
+                            JoinDate = new DateTime(2022, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Mona Said",
+                            Password = "Mona@123",
+                            PhoneNumber = "01123456789",
+                            Salary = 9500.00m
+                        },
+                        new
+                        {
+                            Id = 123456,
+                            DeptId = 3,
+                            Email = "hassan@company.com",
+                            JoinDate = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Hassan Omar",
+                            Password = "Hassan789!",
+                            PhoneNumber = "01234567890",
+                            Salary = 11000.00m
+                        },
+                        new
+                        {
+                            Id = 8080,
+                            DeptId = 1,
+                            Email = "Sara@company.com",
+                            JoinDate = new DateTime(2023, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Sara Youssef",
+                            Password = "Sara@1234",
+                            PhoneNumber = "01345678901",
+                            Salary = 9000.00m
+                        });
                 });
 
             modelBuilder.Entity("Company_System.Models.Employee", b =>

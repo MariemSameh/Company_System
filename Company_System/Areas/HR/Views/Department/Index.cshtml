@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Company_System.Models.Department>
+
+<h1>Departments</h1>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    @Html.ActionLink("Add New", "Create", "Department", new { area = "HR" }, new { @class = "btn btn-success" })
+</div>
+
+<table class="table table-striped table-hover table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th width="20%">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var department in Model)
+        {
+            <tr>
+                <td>@department.Id</td>
+                <td>@department.Name</td>
+                <td>@department.Description</td>
+                <td>
+                    @Html.ActionLink("", "Details", "Department", new { deptId = department.Id, area = "HR" }, new { @class = "btn btn-info btn-sm bi bi-card-list" })
+
+                    @Html.ActionLink("", "Edit", "Department", new { deptId = department.Id, area = "HR" }, new { @class = "btn btn-primary btn-sm bi bi-pencil-square" })
+
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal-@department.Id"><i class="bi bi-trash"></i></button>
+
+                    <!-- Delete Modal -->
+                    <div class="modal fade" id="deleteModal-@department.Id" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel-@department.Id" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-danger text-white">
+                                    <h5 class="modal-title" id="deleteModalLabel-@department.Id">Confirm Deletion</h5>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete department <strong>@department.Name</strong>?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    @using (Html.BeginForm("Delete", "Department", new { deptId = department.Id, area = "HR" }, FormMethod.Post))
+                                    {
+                                        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

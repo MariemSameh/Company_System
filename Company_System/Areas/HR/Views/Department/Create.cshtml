@@ -1,0 +1,41 @@
+﻿@model Company_System.Models.Department
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Create New Department</h4>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Create", "Department", FormMethod.Post, new { area = "HR" }))
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Id)
+                            @Html.TextBoxFor(m => m.Id, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Id, "", new { @class = "text-danger" })
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Name)
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Description)
+                            @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-success mt-2">Create</button>
+                            @Html.ActionLink("Back to List", "Index", "Department", new { area = "HR" }, new { @class = "btn btn-secondary ml-2 mt-2" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
