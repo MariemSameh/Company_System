@@ -71,7 +71,7 @@ namespace Company_System.Areas.HR.Controllers
             {
                 _context.Departments.Update(department);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             return View(department);
         }

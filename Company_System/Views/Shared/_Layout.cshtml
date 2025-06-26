@@ -28,17 +28,22 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Area</a>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="text-decoration:none; color:black" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Areas</a>
+                            <div class="dropdown-menu">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Area</a>
+                                <a class="nav-link text-dark" asp-area="Finance" asp-controller="Home" asp-action="Index">Finance Area</a>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Finance" asp-controller="Home" asp-action="Index">Finance Area</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="HR" asp-controller="Employee" asp-action="Index">Manage Employees</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="HR" asp-controller="Department" asp-action="Index">Manage Departments</a>
+                        
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="text-decoration:none; color:black" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Managment</a>
+                            <div class="dropdown-menu">
+                                <a class="nav-link text-dark" asp-area="HR" asp-controller="Employee" asp-action="Index">Employees</a>
+                                <a class="nav-link text-dark" asp-area="HR" asp-controller="Department" asp-action="Index">Departments</a>
+                            </div>
                         </li>
                     </ul>
                 </div>
